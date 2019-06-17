@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcloud.dao.UsersMapper">
+  <resultMap id="BaseResultMap" type="com.springcloud.entity.Users">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_number" jdbcType="CHAR" property="userNumber" />
+    <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+    <result column="user_sex" jdbcType="INTEGER" property="userSex" />
+    <result column="user_phone" jdbcType="CHAR" property="userPhone" />
+    <result column="user_site" jdbcType="VARCHAR" property="userSite" />
+    <result column="user_birthday" jdbcType="TIMESTAMP" property="userBirthday" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_photo" jdbcType="VARCHAR" property="userPhoto" />
+    <result column="jdiction_id" jdbcType="INTEGER" property="jdictionId" />
+    <result column="user_status" jdbcType="INTEGER" property="userStatus" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from users
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springcloud.entity.Users">
+    insert into users (user_id, user_name, user_number, 
+      user_password, user_sex, user_phone, 
+      user_site, user_birthday, user_email, 
+      user_photo, jdiction_id, user_status
+      )
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userNumber,jdbcType=CHAR}, 
+      #{userPassword,jdbcType=VARCHAR}, #{userSex,jdbcType=INTEGER}, #{userPhone,jdbcType=CHAR}, 
+      #{userSite,jdbcType=VARCHAR}, #{userBirthday,jdbcType=TIMESTAMP}, #{userEmail,jdbcType=VARCHAR}, 
+      #{userPhoto,jdbcType=VARCHAR}, #{jdictionId,jdbcType=INTEGER}, #{userStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.springcloud.entity.Users">
+    update users
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_number = #{userNumber,jdbcType=CHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_sex = #{userSex,jdbcType=INTEGER},
+      user_phone = #{userPhone,jdbcType=CHAR},
+      user_site = #{userSite,jdbcType=VARCHAR},
+      user_birthday = #{userBirthday,jdbcType=TIMESTAMP},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_photo = #{userPhoto,jdbcType=VARCHAR},
+      jdiction_id = #{jdictionId,jdbcType=INTEGER},
+      user_status = #{userStatus,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select user_id, user_name, user_number, user_password, user_sex, user_phone, user_site, 
+    user_birthday, user_email, user_photo, jdiction_id, user_status
+    from users
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <!-- 查询所有的用户信息 -->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select user_id, user_name, user_number, user_password, user_sex, user_phone, user_site, 
+    user_birthday, user_email, user_photo, jdiction_id, user_status
+    from users
+  </select>
+</mapper>
